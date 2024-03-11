@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Treasure Room",
+    "description": "A room filled with glittering treasures.",
+    "eventType": "chest"
+  },
+  {
+    "name": "Monster Lair",
+    "description": "Dark and eerie, a monster lurks in the shadows.",
+    "eventType": "monster"
+  }
+  // Add more rooms as needed.
+]
+
