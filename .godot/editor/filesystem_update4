@@ -1,0 +1,8 @@
+res://example/Example.tscn
+res://src/Character.gd
+res://scenes/player.tscn
+res://src/player.gd
+res://example/Gift.gd
+res://game_objects/rooms/coins_room.gd
+res://game_objects/rooms/thief.gd
+res://PlayerManager.gd

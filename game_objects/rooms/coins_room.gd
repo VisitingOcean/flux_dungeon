@@ -5,7 +5,7 @@ extends TreasureRoom
 func _room_event():
 	
 	var amount = randi_range(50, 500)
-	player.coins += amount
+	player.stats.coins += amount
 	var message = "You gained %d coins!" % [amount]
 	gift.chat(str(message))
 

@@ -8,18 +8,17 @@ const JUMP_VELOCITY = -400.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 
-
-@export var coins: float:
+var stats: Character :
 	get:
-		return coins
-
-	set(value):
-		coins = value
-		if coins < 0:
-			coins = 0
+		return stats
+	set(new_stats):
+		stats = new_stats
 
 
-#var inventory : InventoryItem
+func _ready():
+	pass
+
+
 
 
 func _physics_process(delta):

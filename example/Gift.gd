@@ -3,6 +3,8 @@ extends Gift
 @onready var player = get_tree().get_first_node_in_group("player")
 
 func _ready() -> void:
+	var save_file_path = "user://save/"
+	verify_save_dir(save_file_path)
 	cmd_no_permission.connect(no_permission)
 	chat_message.connect(on_chat)
 	event.connect(on_event)
@@ -45,6 +47,10 @@ func _ready() -> void:
 	add_command("greetme", greet_me)
 	add_command("explore", explore)
 
+
+	add_command('coins', coins)
+	add_command('save', save)
+	add_command('load', load)
 	# This command can only be executed by the streamer
 	add_command("streamer_only", streamer_only, 0, 0, PermissionFlag.STREAMER)
 
@@ -53,7 +59,7 @@ func _ready() -> void:
 
 	# Command that prints every arg seperated by a comma (infinite args allowed), at least 2 required
 	add_command("list", list, -1, 2)
-	add_command('coins', coins)
+
 	# Adds a command alias
 	add_alias("test","test1")
 	add_alias("test","test2")
@@ -119,8 +125,13 @@ func list(cmd_info : CommandInfo, arg_ary : PackedStringArray) -> void:
 	chat(msg)
 
 
+
+
+
 func coins(cmd_info : CommandInfo) -> void:
+	var player = PlayerManager.get_player_state(cmd_info.sender_data.user)
 	chat("You have %d coins." % player.coins)
+	chat("test")
 
 func explore(cmd_info : CommandInfo) -> void:
 	var rooms = ['coins_room', 'thief']
@@ -130,3 +141,23 @@ func explore(cmd_info : CommandInfo) -> void:
 		add_child(room) # Add the room instance to the scene tree
 		room.trigger_event()
 	
+
+func save(cmd_info : CommandInfo) -> void:
+	var character  = Character.new()
+	var character_name = cmd_info.sender_data.user
+	character.name = character_name
+	#ResourceSaver.save(character, save_file_path + character_name + ".tres")
+	chat("Character Saved")
+	
+
+func load(cmd_info : CommandInfo) -> void:
+	var character  = Character.new()
+	var character_name = cmd_info.sender_data.user
+	#character = load_character(character_name)
+	chat("Character Loaded: " + character.name)
+
+
+	
+func verify_save_dir(path: String):
+	
+	DirAccess.make_dir_absolute(path)

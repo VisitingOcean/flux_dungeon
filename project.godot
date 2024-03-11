@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 RoomFactory="*res://src/RoomFactory.gd"
 DamageNumbers="*res://src/damage_numbers.gd"
+PlayerManager="*res://PlayerManager.gd"
 
 [editor_plugins]
 
