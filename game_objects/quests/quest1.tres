@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="QuestResource" load_steps=2 format=3 uid="uid://blmrk82ucw0v8"]
+
+[ext_resource type="Script" path="res://src/QuestResource.gd" id="1_ckabc"]
+
+[resource]
+script = ExtResource("1_ckabc")
+quest_name = "Test quest 1"
+quest_description = "Testing of questing system"
+steps_required = 2
+reward_coins = 100

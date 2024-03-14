@@ -47,6 +47,8 @@ func _ready() -> void:
 	add_command("greetme", greet_me)
 	add_command("explore", explore)
 
+	add_command("quest_status", quest_status)
+
 
 	add_command('coins', coins)
 	add_command('save', save)
@@ -131,16 +133,39 @@ func list(cmd_info : CommandInfo, arg_ary : PackedStringArray) -> void:
 func coins(cmd_info : CommandInfo) -> void:
 	var player = PlayerManager.get_player_state(cmd_info.sender_data.user)
 	chat("You have %d coins." % player.coins)
-	chat("test")
+
 
 func explore(cmd_info : CommandInfo) -> void:
-	var rooms = ['coins_room', 'thief']
-	print("testest")
+	var player : Character = PlayerManager.get_player_state(cmd_info.sender_data.user)
+	#var rooms = ['coins_room', 'thief']
+	var rooms = ['enemy_room']
+
 	var room = RoomFactory.create_room(rooms.pick_random()) # Assuming "treasure_room" is a valid type
+	print(room)
 	if room:
-		add_child(room) # Add the room instance to the scene tree
-		room.trigger_event()
+		var base_room = RoomFactory.create_room("base_room")
+		base_room.global_position = Vector2(200, 200)
+		add_child(base_room)
+		base_room.add_child(room) # Add the room instance to the scene tree
+		room.trigger_event(player)
 	
+
+
+func quest_status(cmd_info: CommandInfo) -> void:
+	var player_id = cmd_info.sender_data.user
+	var player = PlayerManager.get_player_state(player_id)
+	
+	if player.active_quests.size() == 0:
+		chat("You currently have no quests.")
+		return
+
+	# Assuming each player can have multiple quests, iterate through all
+	for quest_resource_path in player.active_quests.keys():
+		var quest = load(quest_resource_path) # Load the quest resource
+		var current_step = player.active_quests[quest_resource_path]
+		var message = "Quest: %s - %s/%s steps completed." % [quest.quest_name, str(current_step), str(quest.steps_required)]
+		chat(message)
+
 
 func save(cmd_info : CommandInfo) -> void:
 	var character  = Character.new()

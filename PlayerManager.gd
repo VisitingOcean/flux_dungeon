@@ -17,7 +17,7 @@ func get_player_state(player_id: String) -> Character:
 		save_character(character)
 		return character
 
-func update_player_state(player_id: String, new_state: Dictionary) -> void:
+func update_player_state(player_id: String, new_state: Character) -> void:
 	players[player_id] = new_state
 
 func remove_player(player_id: String) -> void:
@@ -34,5 +34,6 @@ func load_character(character_name : String):
 		return character
 
 func save_character(character : Character):
+	print("save questst", character.active_quests)
 	ResourceSaver.save(character, save_file_path + character.name + ".tres")
 	return true

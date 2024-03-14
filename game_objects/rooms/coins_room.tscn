@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://cjnk8gpemes8p"]
+[gd_scene load_steps=3 format=3 uid="uid://cjnk8gpemes8p"]
 
 [ext_resource type="Script" path="res://game_objects/rooms/coins_room.gd" id="1_nooqo"]
+[ext_resource type="Texture2D" uid="uid://c6hppsca2le76" path="res://art/chests-01.png" id="2_sv51q"]
 
 [node name="Coins Room" type="Node2D"]
 script = ExtResource("1_nooqo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("2_sv51q")

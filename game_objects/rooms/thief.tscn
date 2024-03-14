@@ -1,6 +1,62 @@
-[gd_scene load_steps=2 format=3 uid="uid://b46wwfdor66ub"]
+[gd_scene load_steps=10 format=3 uid="uid://b46wwfdor66ub"]
 
 [ext_resource type="Script" path="res://game_objects/rooms/thief.gd" id="1_qcwmx"]
+[ext_resource type="Texture2D" uid="uid://ciem7wh56thpd" path="res://art/Axe Bandit.png" id="2_ygfoh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mkvvg"]
+atlas = ExtResource("2_ygfoh")
+region = Rect2(0, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rou3e"]
+atlas = ExtResource("2_ygfoh")
+region = Rect2(80, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1a0rr"]
+atlas = ExtResource("2_ygfoh")
+region = Rect2(160, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_041ia"]
+atlas = ExtResource("2_ygfoh")
+region = Rect2(240, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8n6ae"]
+atlas = ExtResource("2_ygfoh")
+region = Rect2(320, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xvr34"]
+atlas = ExtResource("2_ygfoh")
+region = Rect2(400, 0, 80, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4fsch"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mkvvg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rou3e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1a0rr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_041ia")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8n6ae")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xvr34")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
 
 [node name="Thief" type="Node2D"]
 script = ExtResource("1_qcwmx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_4fsch")
+frame_progress = 0.0273725
