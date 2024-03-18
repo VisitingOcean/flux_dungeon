@@ -1,0 +1,78 @@
+[gd_scene load_steps=13 format=3 uid="uid://cfxl6mucrnu7r"]
+
+[ext_resource type="Script" path="res://scenes/skeleton_warrior.gd" id="1_tsjm2"]
+[ext_resource type="Script" path="res://src/mobresource.gd" id="2_ewavv"]
+[ext_resource type="Texture2D" uid="uid://dew2slw0ijcvc" path="res://art/Pixel Crawler - FREE - 1.8/Enemy/Skeleton Crew/Skeleton - Warrior/Idle/Idle-Sheet.png" id="3_878xj"]
+[ext_resource type="Texture2D" uid="uid://wwim8vs85x00" path="res://art/Pixel Crawler - FREE - 1.8/Weapons/Hands/Hands.png" id="4_x0kf1"]
+[ext_resource type="Texture2D" uid="uid://dt1uy8pmv6vv" path="res://art/Pixel Crawler - FREE - 1.8/Weapons/Bone/Bone.png" id="5_0f77r"]
+[ext_resource type="Script" path="res://src/HealthComponent.gd" id="6_cs6c6"]
+
+[sub_resource type="Resource" id="Resource_1d257"]
+script = ExtResource("2_ewavv")
+name = "Enemy Name"
+health = 20
+attack_power = 5
+defense_level = 2
+luck = 1
+speed = 50
+strategy = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aatp5"]
+atlas = ExtResource("3_878xj")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rxju"]
+atlas = ExtResource("3_878xj")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t252r"]
+atlas = ExtResource("3_878xj")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nw2o8"]
+atlas = ExtResource("3_878xj")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yktl7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aatp5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rxju")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t252r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nw2o8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="skeleton_warrior" type="Node2D"]
+scale = Vector2(4, 4)
+script = ExtResource("1_tsjm2")
+stats = SubResource("Resource_1d257")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_yktl7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, 6)
+texture = ExtResource("4_x0kf1")
+vframes = 4
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(10, -3)
+scale = Vector2(-0.643, 0.643)
+texture = ExtResource("5_0f77r")
+region_enabled = true
+region_rect = Rect2(0, 0, 14.5209, 48.349)
+
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("6_cs6c6")
+max_health = 100.0

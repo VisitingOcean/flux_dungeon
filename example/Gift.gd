@@ -93,7 +93,7 @@ func _ready() -> void:
 func on_event(type : String, data : Dictionary) -> void:
 	match(type):
 		"channel.follow":
-			print("%s followed your channel!" % data["user_name"])
+			("%s followed your channel!" % data["user_name"])
 
 func on_chat(data : SenderData, msg : String) -> void:
 	%ChatContainer.put_chat(data, msg)
@@ -132,19 +132,22 @@ func list(cmd_info : CommandInfo, arg_ary : PackedStringArray) -> void:
 
 func coins(cmd_info : CommandInfo) -> void:
 	var player = PlayerManager.get_player_state(cmd_info.sender_data.user)
-	chat("You have %d coins." % player.coins)
+	player.hide()
+	chat("You have %d coins." % player.stats.coins)
 
 
 func explore(cmd_info : CommandInfo) -> void:
-	var player : Character = PlayerManager.get_player_state(cmd_info.sender_data.user)
-	#var rooms = ['coins_room', 'thief']
+	var player = PlayerManager.get_player_state(cmd_info.sender_data.user)
+	#var rooms = ['coins_room', 'thief', 'enemy_room']
 	var rooms = ['enemy_room']
 
 	var room = RoomFactory.create_room(rooms.pick_random()) # Assuming "treasure_room" is a valid type
 	print(room)
 	if room:
 		var base_room = RoomFactory.create_room("base_room")
-		base_room.global_position = Vector2(200, 200)
+		#base_room.global_position = Vector2(400, 200)
+		var screenSize = get_viewport().size
+		base_room.global_position = screenSize / 2
 		add_child(base_room)
 		base_room.add_child(room) # Add the room instance to the scene tree
 		room.trigger_event(player)
@@ -168,7 +171,7 @@ func quest_status(cmd_info: CommandInfo) -> void:
 
 
 func save(cmd_info : CommandInfo) -> void:
-	var character  = Character.new()
+	var character  = Stats.new()
 	var character_name = cmd_info.sender_data.user
 	character.name = character_name
 	#ResourceSaver.save(character, save_file_path + character_name + ".tres")
@@ -176,7 +179,7 @@ func save(cmd_info : CommandInfo) -> void:
 	
 
 func load(cmd_info : CommandInfo) -> void:
-	var character  = Character.new()
+	var character  = Stats.new()
 	var character_name = cmd_info.sender_data.user
 	#character = load_character(character_name)
 	chat("Character Loaded: " + character.name)
@@ -186,3 +189,5 @@ func load(cmd_info : CommandInfo) -> void:
 func verify_save_dir(path: String):
 	
 	DirAccess.make_dir_absolute(path)
+
+

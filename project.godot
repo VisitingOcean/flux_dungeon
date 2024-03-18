@@ -20,7 +20,18 @@ config/icon="res://icon.svg"
 RoomFactory="*res://src/RoomFactory.gd"
 DamageNumbers="*res://src/damage_numbers.gd"
 PlayerManager="*res://PlayerManager.gd"
+_SignalRelay="*res://src/SignalRelay.gd"
+_Utility="*res://src/utility.gd"
+MobFactory="*res://src/MobFactory.gd"
+
+[display]
+
+window/stretch/mode="viewport"
 
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/gift/plugin.cfg")
+
+[rendering]
+
+viewport/stretch/mode="viewport"
