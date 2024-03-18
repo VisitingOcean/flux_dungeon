@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddgnum0osrt0a"]
+
+[ext_resource type="Script" path="res://src/room_rest.gd" id="1_1ex48"]
+[ext_resource type="Texture2D" uid="uid://cc1xrv5s7npqy" path="res://art/campfire_transparent.png" id="2_6ebnb"]
+
+[node name="room_rest" type="Node2D"]
+script = ExtResource("1_1ex48")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("2_6ebnb")

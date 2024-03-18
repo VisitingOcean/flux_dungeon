@@ -1,8 +1,25 @@
-[gd_scene load_steps=5 format=3 uid="uid://dlwrxpikit5ll"]
+[gd_scene load_steps=7 format=3 uid="uid://dlwrxpikit5ll"]
 
 [ext_resource type="Script" path="res://src/player.gd" id="1_0raig"]
+[ext_resource type="Script" path="res://src/Stats.gd" id="2_2ymuq"]
 [ext_resource type="Script" path="res://src/HealthComponent.gd" id="2_7cksl"]
 [ext_resource type="Texture2D" uid="uid://wvlhi2qvlil3" path="res://art/Apocalypse Character Pack/Player/Idle.png" id="3_g26vk"]
+
+[sub_resource type="Resource" id="Resource_ekcnx"]
+script = ExtResource("2_2ymuq")
+name = "Player Name"
+level = 1
+inventory = []
+experience = 0.0
+stance = 0
+luck = 1.2
+attack_power = 10
+defense_level = 1
+speed = 10
+strategy = 1
+dungeon_level = 1
+coins = 0.0
+active_quests = {}
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7yf6r"]
 
@@ -10,6 +27,7 @@
 z_index = 1
 scale = Vector2(8, 8)
 script = ExtResource("1_0raig")
+stats = SubResource("Resource_ekcnx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["player"]]
 shape = SubResource("CircleShape2D_7yf6r")

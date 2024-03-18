@@ -50,9 +50,10 @@ func _ready() -> void:
 	add_command("quest_status", quest_status)
 
 
-	add_command('coins', coins)
+	add_command('renown', renown)
 	add_command('save', save)
 	add_command('load', load)
+	add_command("rest", rest)
 	# This command can only be executed by the streamer
 	add_command("streamer_only", streamer_only, 0, 0, PermissionFlag.STREAMER)
 
@@ -126,14 +127,25 @@ func list(cmd_info : CommandInfo, arg_ary : PackedStringArray) -> void:
 	msg += arg_ary[arg_ary.size() - 1]
 	chat(msg)
 
-
-
-
-
-func coins(cmd_info : CommandInfo) -> void:
+func rest(cmd_info : CommandInfo) -> void:
 	var player = PlayerManager.get_player_state(cmd_info.sender_data.user)
 	player.hide()
-	chat("You have %d coins." % player.stats.coins)
+	var base_room = RoomFactory.create_room("base_room")
+	#base_room.global_position = Vector2(400, 200)
+	var screenSize = get_viewport().size
+	base_room.global_position = screenSize / 2
+	add_child(base_room)
+	var room = RoomFactory.create_room("room_rest")
+	print(room)
+	base_room.add_child(room) # Add the room instance to the scene tree
+	room.trigger_event(player)
+
+
+
+func renown(cmd_info : CommandInfo) -> void:
+	var player = PlayerManager.get_player_state(cmd_info.sender_data.user)
+	player.hide()
+	chat("You have %d renown." % player.stats.renown)
 
 
 func explore(cmd_info : CommandInfo) -> void:

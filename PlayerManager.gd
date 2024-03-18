@@ -15,6 +15,7 @@ func get_player_state(player_id: String):
 		character = Stats.new()
 		character.name = player_id
 		save_character(character)
+		load_character(character.name)
 		return character
 
 func update_player_state(player_id: String, new_state: Stats) -> void:
@@ -33,12 +34,19 @@ func load_character(character_name : String):
 		var character_data = character_resource.duplicate(true)
 		var character = preload("res://scenes/player.tscn").instantiate()
 		add_child(character)
+		character.health.max_health = character_data.max_health
+		character.health.current_health = character_data.health
 		character.global_position = Vector2( 200, 200)
 		character.stats = character_resource
-		character.health.max_health = character.stats.health
+		#character.health.max_health = character.stats.health.max_health
 
 		return character
 
-func save_character(character : Stats):
-	ResourceSaver.save(character, save_file_path + character.name + ".tres")
+func save_character(character):
+	if character is Stats:
+		ResourceSaver.save(character, save_file_path + character.name + ".tres")
+	else:
+		character.stats.health = character.health.current_health
+		character.stats.max_health= character.health.max_health
+		ResourceSaver.save(character.stats, save_file_path + character.stats.name + ".tres")
 	return true

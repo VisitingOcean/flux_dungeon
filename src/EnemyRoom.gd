@@ -8,36 +8,51 @@ func _room_event(player):
 	player_obj = player
 	handle_monster(player)
 
-# Assuming this is in BaseRoom.gd or a specific room script
+
+
+
 func handle_monster(player):
 	await get_parent().anim.animation_finished
-	var monsters = [
-		"skeleton_warrior",
-		"orc_warrior",
-		"ufo"
-	]
-	var monster = monsters.pick_random()
+	var monster = select_monster_based_on_difficulty()
 	var enemy = MobFactory.create_mob(monster)
-	
+	calculate_difficulty_multipliers()
+	print("monster str mult ", monster_strength_multiplier)
+	enemy.stats.health *= monster_strength_multiplier
+	enemy.stats.attack_power *= monster_strength_multiplier
+	enemy.stats.defense_level *= monster_strength_multiplier
+	# TODO add in strength multiplier
 	add_child(enemy)
-	
-	
-	#player.global_position = Vector2(450, 250)
 
+	
 	var combat_system = CombatSystem.new()
 	combat_system.connect("combat_won", _on_combat_won)
 	combat_system.connect("combat_lost", _on_combat_lost)
-	
 	combat_system.initiate_combat(player, enemy)
+	
+	
+func select_monster_based_on_difficulty() -> String:
+	# Example logic for selecting a monster based on difficulty
+	var monsters = {
+		1: ["skeleton_warrior", "orc_warrior"],
+		2: ["ufo"],
+		3: ["ufo"]
+	}
+	
+	var possible_monsters = monsters.get(difficulty_level, ["skeleton_warrior"])
+	return possible_monsters.pick_random()
 
-func _on_combat_won(player_name, coins_awarded: int):
-	var message = "%s won and was awarded %d coins." % [player_name, coins_awarded]
+	
+func _on_combat_won(player, renown_awarded: int):
+	player.stats.dungeon_level += 1
+	var message = "%s won and was awarded %d renown." % [player.stats.name, renown_awarded]
 	_Utility.create_wavy_text(message)
 	await get_tree().create_timer(3).timeout
+	
 	emit_signal("room_complete")
 
-func _on_combat_lost(player_name, coins_lost: int):
-	var message = "%s was defeated and lost %d coins." % [player_name, coins_lost]
+func _on_combat_lost(player, renown_lost: int):
+	player.stats.dungeon_level = 1
+	var message = "%s was defeated and lost %d renown." % [player.stats.name, renown_lost]
 	_Utility.create_wavy_text(message)
 	await get_tree().create_timer(3).timeout
 	emit_signal("room_complete")

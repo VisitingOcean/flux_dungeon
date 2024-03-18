@@ -2,8 +2,8 @@ extends Node
 
 class_name CombatSystem
 # Signals to communicate combat outcomes
-signal combat_won(player_name, coins_awarded)
-signal combat_lost(player_name, coins_lost)
+signal combat_won(player_name, renown_awarded)
+signal combat_lost(player_name, renown_lost)
 
 func initiate_combat(player, enemy_resource) -> void:
 
@@ -70,15 +70,15 @@ func resolve_attack(attacker, defender, is_player_attacking):
 
 func finalize_combat(player, won_combat: bool) -> void:
 	if won_combat:
-		var coins_awarded = randi_range(50, 150)
-		player.stats.coins += coins_awarded
-		PlayerManager.save_character(player.stats)
-		emit_signal("combat_won", player.stats.name, coins_awarded)
+		var renown_awarded = randi_range(50, 150)
+		player.stats.renown += renown_awarded
+		PlayerManager.save_character(player)
+		emit_signal("combat_won", player, renown_awarded)
 	else:
-		var coins_lost = randi_range(10, 50)
-		player.stats.coins = max(player.stats.coins - coins_lost, 0)
-		PlayerManager.save_character(player.stats)
-		emit_signal("combat_lost", player.stats.name, coins_lost)
+		var renown_lost = randi_range(10, 50)
+		player.stats.renown = max(player.stats.renown - renown_lost, 0)
+		PlayerManager.save_character(player)
+		emit_signal("combat_lost", player, renown_lost)
 
 func strategy_multiplier(player_strategy, enemy_weakness) -> float:
 	# Adjusts the effectiveness of an attack based on strategy choice and enemy weakness.

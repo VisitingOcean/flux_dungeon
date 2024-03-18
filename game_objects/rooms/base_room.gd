@@ -10,20 +10,31 @@ var room_eventType := ""
 #@onready var player = get_tree().get_first_node_in_group("player")
 @onready var anim = $AnimationPlayer
 var current_player
-
+var difficulty_level := 1
+var monster_strength_multiplier := 1.0
+var reward_multiplier := 1.0
 
 func _ready():
 
 	connect("room_complete", clean_up)
 
 func initialize(data: Dictionary) -> void:
-	room_name = data["name"]
-	room_description = data["description"]
-	room_eventType = data["eventType"]
+	#room_name = data["name"]
+	#room_description = data["description"]
+	#room_eventType = data["eventType"]
+	pass
+	# Setup difficulty
 
+
+func calculate_difficulty_multipliers() -> void:
+	# Adjust multipliers based on the difficulty level
+	monster_strength_multiplier = 1.0 + (0.1 * difficulty_level)
+	reward_multiplier = 1.0 + (0.15 * difficulty_level)
 
 func trigger_event(player) -> void:
 	current_player = player
+	difficulty_level = player.stats.dungeon_level
+	calculate_difficulty_multipliers()
 	#var handle_return = _room_event()
 	#gift.chat(handle_return)
 	_room_event(player)
@@ -32,20 +43,40 @@ func trigger_event(player) -> void:
 	player.global_position = screen_middle + Vector2i(100, 100)
 	room_complete.connect(clean_up)
 
+
 func _room_event(player):
+	await get_tree().create_timer(1).timeout
+	# Example of setting a sprite based on room type or difficulty
+	
+	get_parent().anim.play("open_door")
+	handle_event_based_on_type(player)
+
+
+func handle_event_based_on_type(player):
+	return
+	match room_eventType:
+		"trap":
+			handle_trap(player)
+		"monster":
+			handle_monster(player)
+		"room_rest":
+			handle_rest(player)
+		_:
+			print("Unknown room event type: ", room_eventType)
+
+func handle_trap(player):
 	pass
 
-func handle_chest():
-	return "chest"
-	# Logic for handling chest event
-
-func handle_monster(player_id: String):
+func handle_monster(player):
 	pass
 
+
+func handle_rest(player):
+	pass
 
 func clean_up():
 	print("cleaning up")
-	PlayerManager.save_character(current_player.stats)
+	PlayerManager.save_character(current_player)
 	current_player.queue_free()
 	get_parent().queue_free()
 	var rich_text_label = get_tree().get_first_node_in_group("wavealert")
