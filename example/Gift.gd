@@ -97,7 +97,8 @@ func on_event(type : String, data : Dictionary) -> void:
 			("%s followed your channel!" % data["user_name"])
 
 func on_chat(data : SenderData, msg : String) -> void:
-	%ChatContainer.put_chat(data, msg)
+	var chat_container = get_tree().get_first_node_in_group("ChatContainer")
+	chat_container.put_chat(data, msg)
 
 	
 # Check the CommandInfo class for the available info of the cmd_info.
@@ -136,7 +137,7 @@ func rest(cmd_info : CommandInfo) -> void:
 	base_room.global_position = screenSize / 2
 	add_child(base_room)
 	var room = RoomFactory.create_room("room_rest")
-	print(room)
+
 	base_room.add_child(room) # Add the room instance to the scene tree
 	room.trigger_event(player)
 
@@ -150,11 +151,16 @@ func renown(cmd_info : CommandInfo) -> void:
 
 func explore(cmd_info : CommandInfo) -> void:
 	var player = PlayerManager.get_player_state(cmd_info.sender_data.user)
+	
+	if player.health.has_died:
+		rest(cmd_info)
+		return
+	
 	#var rooms = ['coins_room', 'thief', 'enemy_room']
 	var rooms = ['enemy_room']
-
+	
 	var room = RoomFactory.create_room(rooms.pick_random()) # Assuming "treasure_room" is a valid type
-	print(room)
+
 	if room:
 		var base_room = RoomFactory.create_room("base_room")
 		#base_room.global_position = Vector2(400, 200)

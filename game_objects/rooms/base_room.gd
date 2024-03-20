@@ -41,6 +41,8 @@ func trigger_event(player) -> void:
 	var screenSize = get_viewport().size
 	var screen_middle = screenSize / 2
 	player.global_position = screen_middle + Vector2i(100, 100)
+	player.health_bar.position = player.global_position + Vector2(-100, 150)
+	player.health_bar.show()
 	room_complete.connect(clean_up)
 
 
@@ -77,7 +79,10 @@ func handle_rest(player):
 func clean_up():
 	print("cleaning up")
 	PlayerManager.save_character(current_player)
+	var dungeon_level = get_tree().get_first_node_in_group("DungeonLevelLabel")
+	dungeon_level.text = "DUNGEON LEVEL %s" % current_player.stats.dungeon_level
 	current_player.queue_free()
+	current_player.health_bar.hide()
 	get_parent().queue_free()
 	var rich_text_label = get_tree().get_first_node_in_group("wavealert")
 	rich_text_label.hide()

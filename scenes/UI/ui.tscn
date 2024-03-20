@@ -31,7 +31,7 @@ grow_vertical = 2
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="Ui"]
 
-[node name="ChatContainer" type="VBoxContainer" parent="Ui/CanvasLayer2"]
+[node name="ChatContainer" type="VBoxContainer" parent="Ui/CanvasLayer2" groups=["ChatContainer"]]
 unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
@@ -61,7 +61,7 @@ size_flags_vertical = 3
 [node name="HBoxContainer" type="HBoxContainer" parent="Ui/CanvasLayer2/ChatContainer"]
 layout_mode = 2
 
-[node name="LineEdit" type="LineEdit" parent="Ui/CanvasLayer2/ChatContainer/HBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="Ui/CanvasLayer2/ChatContainer/HBoxContainer" groups=["LineEdit"]]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -75,48 +75,50 @@ layout_mode = 2
 text = "Send"
 script = ExtResource("3_j8yeq")
 
-[node name="Control" type="Control" parent="."]
+[node name="GlobalUI Container" type="Control" parent="Ui/CanvasLayer2"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = SubResource("Theme_26v0p")
 
-[node name="MarginContainer" type="MarginContainer" parent="Control"]
+[node name="MarginContainer" type="MarginContainer" parent="Ui/CanvasLayer2/GlobalUI Container"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="Title" type="VBoxContainer" parent="Control/MarginContainer"]
+[node name="Dungeon Info" type="VBoxContainer" parent="Ui/CanvasLayer2/GlobalUI Container/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme = SubResource("Theme_4ompn")
 
-[node name="Label" type="Label" parent="Control/MarginContainer/Title"]
+[node name="DungeonLevelLabel" type="Label" parent="Ui/CanvasLayer2/GlobalUI Container/MarginContainer/Dungeon Info" groups=["DungeonLevelLabel"]]
 layout_mode = 2
 text = "Dungeon Level 1"
 uppercase = true
 
-[node name="Alerts" type="VBoxContainer" parent="Control/MarginContainer"]
+[node name="WavyAlerts" type="VBoxContainer" parent="Ui/CanvasLayer2/GlobalUI Container/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/Alerts"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Ui/CanvasLayer2/GlobalUI Container/MarginContainer/WavyAlerts"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Control/MarginContainer/Alerts/HBoxContainer" groups=["wavealert"]]
+[node name="RichTextLabel" type="RichTextLabel" parent="Ui/CanvasLayer2/GlobalUI Container/MarginContainer/WavyAlerts/HBoxContainer" groups=["wavealert"]]
 visible = false
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
@@ -126,3 +128,14 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_xf00v")
 bbcode_enabled = true
 text = "[center]TESTing oieanr sotien aoirsnt aioerns tioean rstarst[/center]"
 scroll_active = false
+
+[node name="PlayerHealthBar" type="ProgressBar" parent="Ui/CanvasLayer2/GlobalUI Container" groups=["PlayerHealthBar"]]
+visible = false
+layout_mode = 2
+offset_left = 471.0
+offset_top = 408.0
+offset_right = 687.0
+offset_bottom = 435.0
+step = 1.0
+value = 80.0
+show_percentage = false

@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://scenes/skeleton_warrior.gd" id="1_tsjm2"]
 [ext_resource type="Script" path="res://src/mobresource.gd" id="2_ewavv"]
-[ext_resource type="Texture2D" uid="uid://dew2slw0ijcvc" path="res://art/Pixel Crawler - FREE - 1.8/Enemy/Skeleton Crew/Skeleton - Warrior/Idle/Idle-Sheet.png" id="3_878xj"]
-[ext_resource type="Texture2D" uid="uid://wwim8vs85x00" path="res://art/Pixel Crawler - FREE - 1.8/Weapons/Hands/Hands.png" id="4_x0kf1"]
-[ext_resource type="Texture2D" uid="uid://dt1uy8pmv6vv" path="res://art/Pixel Crawler - FREE - 1.8/Weapons/Bone/Bone.png" id="5_0f77r"]
+[ext_resource type="Texture2D" uid="uid://x2bxtqu3xy6m" path="res://art/Pixel Crawler - FREE - 1.8/Enemy/Skeleton Crew/Skeleton - Warrior/Idle/Idle-Sheet.png" id="3_878xj"]
+[ext_resource type="Texture2D" uid="uid://c8n1kmtdx1v0r" path="res://art/Pixel Crawler - FREE - 1.8/Weapons/Hands/Hands.png" id="4_x0kf1"]
+[ext_resource type="Texture2D" uid="uid://c8p83sh4h5hk8" path="res://art/Pixel Crawler - FREE - 1.8/Weapons/Bone/Bone.png" id="5_0f77r"]
 [ext_resource type="Script" path="res://src/HealthComponent.gd" id="6_cs6c6"]
 
 [sub_resource type="Resource" id="Resource_1d257"]

@@ -18,4 +18,5 @@ func trigger_event(player):
 	current_player = player
 	_Utility.create_wavy_text("Health restored...")
 	await get_tree().create_timer(2).timeout
+	
 	clean_up()

@@ -8,11 +8,18 @@ extends CharacterBody2D
 	set(new_stats):
 		stats = new_stats
 
-
+@onready var health_bar = get_tree().get_first_node_in_group("PlayerHealthBar")
 func _ready():
 	
 	health.damage_dealt.connect(_damage_effect)
 	health.death_event.connect(_death_effect)
+	health.health_change_event.connect(_update_health_bar)
+	health_bar.position = global_position
+	
+
+func _update_health_bar():
+	print("health event")
+	health_bar.value = health.current_health_percent
 	
 func _damage_effect():
 	flash_red()

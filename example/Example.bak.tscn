@@ -1,0 +1,98 @@
+[gd_scene load_steps=7 format=3 uid="uid://blgipkamopy18"]
+
+[ext_resource type="Script" path="res://example/Gift.gd" id="1_j5bhv"]
+[ext_resource type="Script" path="res://example/ChatContainer.gd" id="2_5einj"]
+[ext_resource type="Script" path="res://example/LineEdit.gd" id="3_6fp3x"]
+[ext_resource type="Script" path="res://example/Button.gd" id="4_n3q5i"]
+
+[sub_resource type="Theme" id="Theme_wv05u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uvmn8"]
+
+[node name="Example" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Gift" type="Node" parent="." groups=["gift"]]
+unique_name_in_owner = true
+script = ExtResource("1_j5bhv")
+scopes = Array[String](["chat:edit", "chat:read", "moderator:read:followers"])
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.009
+offset_right = 4.0
+offset_bottom = 0.167959
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Control"]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ChatContainer" type="VBoxContainer" parent="Control/CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_5einj")
+
+[node name="Chat" type="Panel" parent="Control/CanvasLayer/ChatContainer"]
+show_behind_parent = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/CanvasLayer/ChatContainer/Chat"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+follow_focus = true
+
+[node name="ChatMessagesContainer" type="VBoxContainer" parent="Control/CanvasLayer/ChatContainer/Chat/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/CanvasLayer/ChatContainer"]
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="Control/CanvasLayer/ChatContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+caret_blink = true
+script = ExtResource("3_6fp3x")
+
+[node name="Button" type="Button" parent="Control/CanvasLayer/ChatContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Send"
+script = ExtResource("4_n3q5i")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/CanvasLayer" groups=["wavealert"]]
+visible = false
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -227.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_wv05u")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_uvmn8")
+bbcode_enabled = true
+text = "[center]TESTing oieanr sotien aoirsnt aioerns tioean rstarst[/center]"
+scroll_active = false

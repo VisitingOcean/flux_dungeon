@@ -32,6 +32,7 @@ signal status_damage_dealt
 			current_health >= _previous_health
 			
 		)
+		print("------signal should emit")
 		emit_signal("health_change_event", healthUpdate)
 
 
