@@ -2,4 +2,6 @@
 *.import
 .aider*
 .godot/
+.godot/
+.DS_STORE
 

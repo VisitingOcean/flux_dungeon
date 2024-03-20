@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cjnk8gpemes8p"]
 
 [ext_resource type="Script" path="res://game_objects/rooms/coins_room.gd" id="1_nooqo"]
-[ext_resource type="Texture2D" uid="uid://c6hppsca2le76" path="res://art/chests-01.png" id="2_sv51q"]
+[ext_resource type="Texture2D" uid="uid://6ym516b30x48" path="res://art/chests-01.png" id="2_sv51q"]
 
 [node name="Coins Room" type="Node2D"]
 z_index = -1

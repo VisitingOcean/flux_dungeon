@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://b46wwfdor66ub"]
 
 [ext_resource type="Script" path="res://game_objects/rooms/thief.gd" id="1_qcwmx"]
-[ext_resource type="Texture2D" uid="uid://ciem7wh56thpd" path="res://art/Axe Bandit.png" id="2_ygfoh"]
+[ext_resource type="Texture2D" uid="uid://deqb7w76t4lox" path="res://art/Axe Bandit.png" id="2_ygfoh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mkvvg"]
 atlas = ExtResource("2_ygfoh")
