@@ -17,8 +17,7 @@ func _ready():
 	health_bar.position = global_position
 	
 
-func _update_health_bar():
-	print("health event")
+func _update_health_bar(update = HealthUpdate):
 	health_bar.value = health.current_health_percent
 	
 func _damage_effect():

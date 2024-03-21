@@ -32,12 +32,10 @@ signal status_damage_dealt
 			current_health >= _previous_health
 			
 		)
-		print("------signal should emit")
 		emit_signal("health_change_event", healthUpdate)
 
 
 		if !has_health_remaining and !has_died:
-			print("----dead-----")
 			print(get_parent())
 			has_died = true
 			emit_signal("death_event")

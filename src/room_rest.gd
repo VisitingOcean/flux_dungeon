@@ -15,6 +15,7 @@ func trigger_event(player):
 	get_parent().anim.play("open_door")
 	await get_parent().anim.animation_finished
 	player.health.current_health = player.health.max_health
+	player.stats.dungeon_level = 1
 	current_player = player
 	_Utility.create_wavy_text("Health restored...")
 	await get_tree().create_timer(2).timeout
